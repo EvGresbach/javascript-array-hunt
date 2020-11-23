@@ -100,36 +100,91 @@ $(document).ready(function () {
         Output it to td#firstEnn
          */
 
+        for (var i = 0; i < myArray.length; i++)
+        {
+            if(myArray[i].includes("n"))
+            {
+                $("td#firstEnn").text(myArray[i]);
+                break;
+            }
+        }
+
 
         /*
         Find all of the strings with less than 6 characters.
         Output them to td#lessThanSix
          */
+        var output = "";
+        for (var i = 0; i < myArray.length; i++)
+        {
 
+            if(myArray[i].length < 6)
+            {
+                output += myArray[i] + " ";
+            }
+        }
+        $("td#lessThanSix").text(output);
 
         /*
         Find the longest string in the array.
         Output it to td#longName
          */
-
+        var longest = 0;
+        for (var i = 0; i < myArray.length; i++)
+        {
+            if(myArray[i].length > myArray[longest].length)
+            {
+                longest = i;
+            }
+        }
+        $("td#longName").text(myArray[longest]);
 
         /*
         Find all of the strings that do not contain the letter 's'.
         Output them to td#noEss
          */
-
+        output = "";
+        for (var i = 0; i < myArray.length; i++)
+        {
+            if(myArray[i].includes("s"))
+            {
+                continue;
+            }
+            output += myArray[i] + ", ";
+        }
+        $("td#noEss").text(output);
 
         /*
         Output all of the strings, but with all of their vowels
         in uppercase, to td#upperVowels
          */
 
+        var upperCase = []; //array for each word with upper case vowels
+        var upperCaseCopy = []; // array to print out
+        for(var i = 0; i < myArray.length; i++)
+        {
+            var split = myArray[i].split("");
+            for(var letter of split)
+            {
+                if(letter == "a" || letter =="e"  || letter=="i" ||letter=="o" ||letter=="u")
+                {
+                    upperCase.push(letter.toUpperCase());
+                    continue;
+                }
+                upperCase.push(letter);
+            }
+            upperCaseCopy.push(upperCase.join(""));
+            upperCase = []
+        }
+        $("td#upperVowels").text(upperCaseCopy.join(", "));
+
 
         /*
         Output all of the strings in reverse order and separated by
         ' - ' to td#reverseDash
          */
-
+        myArray.reverse();
+        $("td#reverseDash").text(myArray.join("-"));
 
     }
 
